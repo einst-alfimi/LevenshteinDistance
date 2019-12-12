@@ -31,12 +31,7 @@ const calcDistance = (text_1,text_2) => {
 
 // ひらがなをカタカナへ変換
 // https://www.nishishi.com/javascript-tips/regexp-katakana-hiragana.html
-const hiraToKana = 
-    (str) => str.replace(/[\u3041-\u3097]/g, (match) => {
-        var chr = match.charCodeAt(0) + 0x60;
-        return String.fromCharCode(chr);
-    });
-
+const hiraToKana = (str) => str.replace(/[\u3041-\u3097]/g, (match) => String.fromCharCode(match.charCodeAt(0) + 0x60));
 
 window.addEventListener('load', ()=>{
     const text_1 = document.getElementById('text_1');
