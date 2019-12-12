@@ -32,10 +32,10 @@ const calcDistance = (text_1,text_2) => {
 window.addEventListener('load', ()=>{
     const text_1 = document.getElementById('text_1');
     const text_2 = document.getElementById('text_2');
-    text_1.addEventListener('keypress', ()=>{
+    text_1.addEventListener('keyup', ()=>{
         calcDistance(text_1.value, text_2.value);
     })
-    text_2.addEventListener('keypress', ()=>{
+    text_2.addEventListener('keyup', ()=>{
         calcDistance(text_1.value, text_2.value);
     })
 });
