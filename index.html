@@ -1,13 +1,14 @@
 <script>
-const s = (text_1,text_2) => {
-    let res = [];
+// メイン処理
+const calcDistance = (text_1,text_2) => {
+    const res = [];
     const split_1 = text_1.split('');
     const split_2 = text_2.split('');
     split_1.unshift('0');
     split_2.unshift('0');
 
     split_1.forEach((v,i) => {
-        let line = [];
+        const line = [];
         split_2.forEach((v2,i2) => {
             if (i === 0) {
                 line.push(i2);
@@ -16,31 +17,26 @@ const s = (text_1,text_2) => {
             } else {
                 const a = line[i2-1] + 1; //左
                 const b = res[i-1][i2] + 1; //上
-                const c = res[i-1][i2-1] + (v === v2 ? 0 : 1); //左上                
-                line.push(checkLess(a,b,c));
+                const c = res[i-1][i2-1] + (v === v2 ? 0 : 1); //左上
+                line.push(Math.min(a,b,c));
             }
         });
         res.push(line);
     });
 
-    console.table(res);
-    let result = document.getElementById('result');
+    console.table(res); 
+    const result = document.getElementById('result');
     result.value = res[split_1.length-1][split_2.length-1];
-}
-const checkLess = (a,b,c) => {
-    return a<=b && a<=c ? a
-    : b<=a && b<=c ? b
-    : c;
 }
 
 window.addEventListener('load', ()=>{
     const text_1 = document.getElementById('text_1');
     const text_2 = document.getElementById('text_2');
-    text_1.addEventListener('change', ()=>{
-        s(text_1.value, text_2.value);
+    text_1.addEventListener('keypress', ()=>{
+        calcDistance(text_1.value, text_2.value);
     })
-    text_2.addEventListener('change', ()=>{
-        s(text_1.value, text_2.value);
+    text_2.addEventListener('keypress', ()=>{
+        calcDistance(text_1.value, text_2.value);
     })
 });
 
@@ -50,4 +46,4 @@ window.addEventListener('load', ()=>{
 <input type="text" id="text_1">
 <input type="text" id="text_2"> <br>
 レーベンシュタイン距離は…　<input type="text" id="result" disabled>
-<body>
+</body>
